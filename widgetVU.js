@@ -30,7 +30,7 @@
 				a([urlel,nameel,exurl]).html("");
 				
 				console.log(u);
-				var color = a(".widgetForm",u).style.borderColor;
+				var color = a(".widgetForm",u).css("borderColor");
 				
 				var inject = url == defaultNU[1] || name == defaultNU[0] ? "" : "<a class='custreferral' style='background:" + color + "!important;left: 0 !important;display:inline-block !important;' href='" + url + "' >" +name + "</a>";
 				inject += '<a class="exurl" href="' + exercise + '" target="_blank" style="left: 0 !important;display:inline-block !important;">Demo Request</A><br><br>';
