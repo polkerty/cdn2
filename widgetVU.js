@@ -19,9 +19,9 @@
 					url = "http://" + url;
 				}
 				
-				$(urlel).hide();
+				a(urlel).hide();
 				
-				$(nameel).html("<a href='" + url + "' >" +name + "</a>");
+				a(nameel).html("<a href='" + url + "' >" +name + "</a>");
 				
 				
 				//custom code here
