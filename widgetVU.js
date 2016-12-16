@@ -25,7 +25,7 @@
 				
 				a(nameel).html(inject);
 				
-				a(".actual_answer",u).html(inject);
+				a(".actual_answer",u).html(a(".actual_answer",u).html() + inject);
 				
 				}
 				
