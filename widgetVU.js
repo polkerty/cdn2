@@ -21,7 +21,7 @@
 				
 				a(urlel).html("");
 				
-				var inject = "<a href='" + url + "' >" +name + "</a>");
+				var inject = "<a href='" + url + "' >" +name + "</a>";
 				
 				a(nameel).html(inject);
 				
