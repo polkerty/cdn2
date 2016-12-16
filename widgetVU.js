@@ -25,7 +25,7 @@
 				
 				a([urlel,nameel,exurl]).html("");
 				
-				var inject = url == defaultNU[1] || name = defaultNU[0] ? "" : "<a class='custreferral' href='" + url + "' >" +name + "</a>";
+				var inject = url == defaultNU[1] || name == defaultNU[0] ? "" : "<a class='custreferral' href='" + url + "' >" +name + "</a>";
 				inject += '<a class="exurl" href="' + exurl + '" target="_blank" style="left: 0 !important;display:inline-block !important;">Demo Request</A><br><br>';
 
 				
