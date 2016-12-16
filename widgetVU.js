@@ -23,13 +23,19 @@
 					url = "http://" + url;
 				}
 				
+				if ( exercise == "Exercise.com Referral" ) {
+					exercise = "https://exercise.com/business";
+				}
+				
 				a([urlel,nameel,exurl]).html("");
 				
-				var inject = url == defaultNU[1] || name == defaultNU[0] ? "" : "<a class='custreferral' href='" + url + "' >" +name + "</a>";
-				inject += '<a class="exurl" href="' + exurl + '" target="_blank" style="left: 0 !important;display:inline-block !important;">Demo Request</A><br><br>';
+				var color = a(u).style.borderColor;
+				
+				var inject = url == defaultNU[1] || name == defaultNU[0] ? "" : "<a class='custreferral' style='background:" + color + "!important;left: 0 !important;display:inline-block !important;' href='" + url + "' >" +name + "</a>";
+				inject += '<a class="exurl" href="' + exercise + '" target="_blank" style="left: 0 !important;display:inline-block !important;">Demo Request</A><br><br>';
 
 				
-				a(nameel).html('<style>.widgetTitle img { max-width:100% !important; }#like_in_calc { display:none  !important;}#widgetForm input.backButton {bottom:50px !important;}.exurl {padding: 8px 13px 8px 13px !important;font-size: 16px !important;float: right !important;color: #ffffff   !important;background-image: -moz-linear-gradient(top, #d7782c  , #b86114  )  !important;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d7782c  ), color-stop(1, #b86114  ))  !important;background-image: -ms-linear-gradient(top, #d7782c  , #b86114  )  !important;filter: progid: DXImageTransform.Microsoft.Gradient(startColorStr="#d7782c  ", endColorStr="#b86114  ", GradientType=0 ) !important;border-radius: 5px !important;-moz-border-radius: 5px !important;-webkit-border-radius: 5px !important;border: 1px solid #a95e16   !important;-webkit-text-shadow: 1px 1px 3px #4d4d4d   !important;-moz-text-shadow: 1px 1px 3px #4d4d4d   !important;-o-text-shadow: 1px 1px 3px #4d4d4d   !important;-ms-text-shadow: 1px 1px 3px #4d4d4d   !important;text-shadow: 1px 1px 3px #4d4d4d   !important;-webkit-box-shadow: 0 0 5px -1px #343434   !important;-moz-box-shadow: 0 0 5px -1px #343434   !important;box-shadow: 0 0 5px -1px #343434   !important;font-weight: normal !important;margin-left:auto !important;bottom:0 !important;margin-right:auto !important;display:block !important;clear:both !important;position:absolute !important;left:0% !important;min-width:99% !important;padding-left:0px !important;padding-right:0px !important;text-align:center !important;}.answer_area {overflow-y: visible !important;}</style>');
+				a(nameel).html('.widgetTitle img { max-width:100% !important; }#like_in_calc { display:none  !important;}#widgetForm input.backButton {bottom:50px !important;}a.exurl {padding: 8px 13px 8px 13px !important;font-size: 16px !important;float: right !important;color: #ffffff   !important;background-image: -moz-linear-gradient(top, #d7782c  , #b86114  )  !important;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d7782c  ), color-stop(1, #b86114  ))  !important;background-image: -ms-linear-gradient(top, #d7782c  , #b86114  )  !important;filter: progid: DXImageTransform.Microsoft.Gradient(startColorStr="#d7782c  ", endColorStr="#b86114  ", GradientType=0 ) !important;border-radius: 5px !important;-moz-border-radius: 5px !important;-webkit-border-radius: 5px !important;border: 1px solid #a95e16   !important;-webkit-text-shadow: 1px 1px 3px #4d4d4d   !important;-moz-text-shadow: 1px 1px 3px #4d4d4d   !important;-o-text-shadow: 1px 1px 3px #4d4d4d   !important;-ms-text-shadow: 1px 1px 3px #4d4d4d   !important;text-shadow: 1px 1px 3px #4d4d4d   !important;-webkit-box-shadow: 0 0 5px -1px #343434   !important;-moz-box-shadow: 0 0 5px -1px #343434   !important;box-shadow: 0 0 5px -1px #343434   !important;font-weight: normal !important;margin-left:auto !important;bottom:30 !important;margin-right:auto !important;display:block !important;clear:both !important;position:absolute !important;left:0% !important;min-width:99% !important;padding-left:0px !important;padding-right:0px !important;text-align:center !important;}.answer_area {overflow-y: visible !important;}a.custreferral {display: inline-block !important;bottom: 0 !important;position: absolute !important;width: 99% !important;text-align: center !important;left: 0 !important;padding-top: 5px !important;padding-bottom: 5px !important;}');
 				
 				a(".actual_answer",u).html(a(".actual_answer",u).html() + inject);
 				
