@@ -19,7 +19,7 @@
 					url = "http://" + url;
 				}
 				
-				a(urlel).hide();
+				a(urlel).html("");
 				
 				a(nameel).html("<a href='" + url + "' >" +name + "</a>");
 				
