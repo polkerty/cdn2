@@ -26,9 +26,7 @@
 				a(nameel).html(inject);
 				
 				a(".actual_answer",u).html(a(".actual_answer",u).html() + inject);
-				
-				}
-				
+								
 				//custom code here
 				
 				
