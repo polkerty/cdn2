@@ -12,8 +12,8 @@
 				var nameel = ips[ips.length-2];
 				var urlel = ips[ips.length-1];
 				
-				var url = urlel.innerHTML.split("<div")[0];
-				var name = nameel.innerHTML.split("<div")[0];
+				var url = urlel.innerHTML.split(":<div")[0];
+				var name = nameel.innerHTML.split(":<div")[0];
 				
 				if ( url.substr(0,4) != "http" ) {
 					url = "http://" + url;
