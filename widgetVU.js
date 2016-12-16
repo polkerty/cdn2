@@ -15,7 +15,7 @@
 				var url = urlel.innerHTML.split("<div")[0];
 				var name = nameel.innerHTML.split("<div")[0];
 				
-				if ( !(url.split("https://").length || url.split("http://").length ) {
+				if ( !(url.split("https://").length || url.split("http://").length) ) {
 					url = "http://" + url;
 				}
 				
