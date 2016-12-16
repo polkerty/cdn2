@@ -21,8 +21,13 @@
 				
 				a(urlel).html("");
 				
-				a(nameel).html("<a href='" + url + "' >" +name + "</a>");
+				var inject = "<a href='" + url + "' >" +name + "</a>");
 				
+				a(nameel).html(inject);
+				
+				a(".actual_answer",u).html(inject);
+				
+				}
 				
 				//custom code here
 				
