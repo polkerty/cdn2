@@ -2,6 +2,10 @@
     function a() {
         e = window.jQuery.noConflict(!0), b()
     }
+    
+    function redo() {
+    	b();
+    }
 
     function b() {
         d(), e(document).ready(function(a) {
@@ -171,7 +175,7 @@
                     i.state.loadingError = "An error occured, please check your inputs.", b()
                 }), !1
             }), a(u).on("click", ".widgetForm .backButton", function() {
-                return main_mulch_widget();
+                return redo();
             })
         })
     }
