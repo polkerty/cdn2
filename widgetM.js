@@ -1,4 +1,4 @@
-! function() {
+! function main_mulch_widget() {
     function a() {
         e = window.jQuery.noConflict(!0), b()
     }
@@ -10,39 +10,44 @@
 
 				//custom code here
 				
-				var ips = a(".form_area .field",u).toArray();
 				
-				var sels = {
-					"Landscape Rubber Mulch": "<option value="">1.5</option><option value="">2</option><option value="">2.5</option><option value="">3</option>",
-					"Playground Rubber Mulch": "<option value="">4</option><option value="">5</option><option value="">6</option><option value="">7</option><option value="">8</option><option value="">9</option><option value="">10</option><option value="">11</option><option value="">12</option>",
-					"Training Surface Rubber Mulch": "<option value="">4</option><option value="">5</option><option value="">6</option><option value="">7</option><option value="">8</option><option value="">9</option><option value="">10</option><option value="">11</option><option value="">12</option><option value="">13</option><option value="">14</option><option value="">15</option>",
-					"Equestrian Area Infill": "<option value="">1</option><option value="">1.5</option><option value="">2</option><option value="">2.5</option><option value="">3</option><option value="">3.5</option><option value="">4</option>",
-					"Synthetic Turf Infill": "<option value="">1/8</option><option value="">1/4</option><option value="">1/2</option><option value="">3/4</option><option value="">1</option><option value="">1 1/4</option><option value="">1 1/2</option><option value="">1 3/4</option><option value="">2</option><option value="">2 1/4</option><option value="">2 1/2</option>",
-					"Natural Turf Topdressing": "<option value="">1/8</option><option value="">1/4</option><option value="">1/2</option><option value="">3/4</option><option value="">1</option>";
+				var ips = a(".form_area .field input",u).toArray();
+				var sels = a(".form_area .field select",u).toArray();
+				var back = a(".answer_area input.backButton",u).toArray()[0];
+
+				var ops = {
+					"Landscape Rubber Mulch": "<option value='1.5'>1.5</option><option value='2'>2</option><option value='2.5'>2.5</option><option value='3'>3</option>",
+					"Playground Rubber Mulch": "<option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>",
+					"Training Surface Rubber Mulch": "<option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option>",
+					"Equestrian Area Infill": "<option value='1'>1</option><option value='1.5'>1.5</option><option value='2'>2</option><option value='2.5'>2.5</option><option value='3'>3</option><option value='3.5'>3.5</option><option value='4'>4</option>",
+					"Synthetic Turf Infill": "<option value='1/8'>1/8</option><option value='1/4'>1/4</option><option value='1/2'>1/2</option><option value='3/4'>3/4</option><option value='1'>1</option><option value='1 1/4'>1 1/4</option><option value='1 1/2'>1 1/2</option><option value='1 3/4'>1 3/4</option><option value='2'>2</option><option value='2 1/4'>2 1/4</option><option value='2 1/2'>2 1/2</option>",
+					"Natural Turf Topdressing": "<option value='1/8'>1/8</option><option value='1/4'>1/4</option><option value='1/2'>1/2</option><option value='3/4'>3/4</option><option value='1'>1</option>"
 				}
 				
-				var sqft = ips[3];
+				var sqft = sels[1];
 				
 				var change_handler = function() {
-					var nv = ips[1].value*ips[2].value;
+					var nv = (+ips[0].value)*(+ips[1].value);
 					if ( !(isNaN(nv)) ) {
-						ips[3].value = nv;
+						ips[2].value = nv;
 					}
 				}
 				
+				var fill_handler = function() {
+					sels[1].innerHTML = ops[sels[0].value];
+				}
+				
+				var refresh_inner = function() {
+					sels[0].innerHTML = ihtml;
+				}
+				
+				
+				ips[0].onchange = change_handler;
+				ips[0].onkeyup = change_handler;
 				ips[1].onchange = change_handler;
 				ips[1].onkeyup = change_handler;
-				ips[2].onchange = change_handler;
-				ips[2].onkeyup = change_handler;
 				
-				var keys = {
-					
-				
-				}
-				
-				ips[0].onchange = function() {
-					ips[4].innerHTML = sels[ips[0].value];
-				}
+				sels[0].onchange = fill_handler;
 				
 				
 				
@@ -166,7 +171,7 @@
                     i.state.loadingError = "An error occured, please check your inputs.", b()
                 }), !1
             }), a(u).on("click", ".widgetForm .backButton", function() {
-                return i.state = e.extend({}, l), b(), !1
+                return main_mulch_widget();
             })
         })
     }
