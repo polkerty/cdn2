@@ -27,7 +27,7 @@
 				*/
 											
 				//setup				
-				a(u).append("<style>#widgetForm input[type=range] { width:140px !important; } #widgetForm .mc_report { font-size:16pt !important; float:right !important;position:relative !important; top:-15px !important;}</style>");
+				a(u).append("<style>#widgetForm input.num { width:50px !important; text-align:center !important;} #widgetForm input[type=range] { width:140px !important; } #widgetForm .mc_report { font-size:16pt !important; float:right !important;position:relative !important; top:-15px !important;}</style>");
 				a("input[name=input7]", u).after("<span class='mc_report' id='mc_lbm' >0 lb</span>");
 				a("input[name=input7]", u).remove();
 				a("input[name=input8]", u).after("<span class='mc_report' id='mc_bmr' >0</span>");
@@ -37,13 +37,13 @@
 				a("input[name=input11]", u).after("<span class='mc_report' id='mc_cals' >0 cal</span>");
 				a("input[name=input11]", u).remove();
 				a("input[name=input12]", u).after("<span class='mc_report' id='mc_pcals' >0 g</span>");
-				a("input[name=input12]", u).after("<span id='mc_ppct' >33%</span><input type='range' id='mc_12' step='1' min='0' max='100' value='33' /><span id='mc_pcnt' >0 Cal</span>");
+				a("input[name=input12]", u).after("<input class='num' id='mc_ppct0' value='33'/>%<input type='range' id='mc_12' step='1' min='0' max='100' value='33' /><span id='mc_pcnt' >0 Cal</span>");
 				a("input[name=input12]", u).remove();
 				a("input[name=input13]", u).after("<span class='mc_report' id='mc_ccals' >0 g</span>");
-				a("input[name=input13]", u).after("<span id='mc_cpct' >33%</span><input type='range' id='mc_13' step='1' min='0' max='100' value='33' /><span id='mc_ccnt' >0 Cal</span>");
+				a("input[name=input13]", u).after("<input class='num' id='mc_cpct0' value='33'/>%<input type='range' id='mc_13' step='1' min='0' max='100' value='33' /><span id='mc_ccnt' >0 Cal</span>");
 				a("input[name=input13]", u).remove();
 				a("input[name=input14]", u).after("<span class='mc_report' id='mc_fcals' >0 g</span>");
-				a("input[name=input14]", u).after("<span id='mc_fpct' >34%</span><input type='range' id='mc_14' step='1' min='0' max='100' value='34' /><span id='mc_fcnt' >0 Cal</span>");
+				a("input[name=input14]", u).after("<input class='num' id='mc_fpct0' value='33'/>%<input type='range' id='mc_14' step='1' min='0' max='100' value='34' /><span id='mc_fcnt' >0 Cal</span>");
 				a("input[name=input14]", u).remove();
 				a(".calc_button").remove();
 				
@@ -51,19 +51,24 @@
 				ips[11] = a("#mc_12")[0];
 				ips[12] = a("#mc_13")[0];
 				ips[13] = a("#mc_14")[0];
-
-				a("select,input[type!=range]").change(update_display);
-				a("input[type!=range]").keyup(update_display);
+				
+				a("input.num").change(read_slider_boxes);
+				a("input.num").keyup(read_slider_boxes);
+				a("input.num").click(function() { a(this).focus(); });
+				a("select,input[type!=range]:not(.num)").change(update_display);
+				a("input[type!=range]:not(.num)").keyup(update_display);
 				a(u).on("input", "input[type=range]",update_display);
+				
+				
+				var fields = a(".field",u).toArray();
+				a([fields[4],fields[5]]).html(""); 
 				
 				
 				//$("input6", u).hide().after("<span id='mc_lbm' ></span>");
 				
-				
-				function update_display() {
-																		
-					if ( this.type == "range" ) {
-						var id = this.id.split("_")[1]-1;
+				function equalize_sliders( rangeElement ) {
+
+						var id = rangeElement.id.split("_")[1]-1;
 						if ( !isNaN(id) ) {
 							var next_one =  ips[[11,12,13][(id - 10)%3]];
 							var on_deck =  ips[[11,12,13][(id - 9)%3]];
@@ -88,6 +93,42 @@
 							}
 
 						}
+						
+						
+					a("#mc_ppct0").val(ips[11].value);	
+					a("#mc_cpct0").val(ips[12].value);	
+					a("#mc_fpct0").val(ips[13].value);	
+					
+				
+				}
+				
+				function read_slider_boxes() {
+					var val = this.value.split("%")[0]*1;
+					val = Math.floor(Math.max(0,Math.min(val,100)));
+					
+					if ( isNaN(val ) ) {
+						val = 0;
+					}
+					
+					console.log(val, this.value*1);
+					if ( val != this.value*1 ) {
+						a(this).val(val);
+					}
+					console.log(this);
+					a(this).next("input[type=range]").val(val);
+					console.log(a(this).next("input[type=range]").toArray());
+					//return update_display(event, a(this).closest("input[type=range]")[0]);
+					
+					equalize_sliders(a(this).next("input[type=range]")[0]);
+				}
+				
+				function update_display( event, rangeElement ) {
+								
+					if ( this.type == "range" || rangeElement ) {
+						
+						rangeElement = rangeElement || this;
+						
+						equalize_sliders( rangeElement);
 					}
 					
 					var data = results();
@@ -105,11 +146,7 @@
 						} else {
 							$el.innerHTML = data[x];
 						}
-					}
-					
-					
-				
-				
+					}					
 				}
 				
 				function blank() {
@@ -144,9 +181,9 @@
 					
 					activity_multiplier = 1;//data[7] == "" ? 1 : data[7];
 
-					protein_percent = .01*data[13] // .01*(int)str_replace("%","","{10}");
-					carbs_percent = .01*data[14] //.01*(int)str_replace("%","","{11}");
-					fat_percent = 1 - protein_percent - carbs_percent; // .01*(int)str_replace("%","","{12}");
+					protein_percent = .01*data[12] // .01*(int)str_replace("%","","{10}");
+					carbs_percent = .01*data[13] //.01*(int)str_replace("%","","{11}");
+					fat_percent = .01*data[14]; // .01*(int)str_replace("%","","{12}");
 
 					//Custom:<1 Hours Exercise Per Week:1-3 Hours Exercise Per Week:4-6 Hours Exercise Per Week:6+ Hours Exercise Per Week
 					if ( data[7] != "Custom" ) {
@@ -162,7 +199,7 @@
 
 						lbm = data[4] - (body_fat_percentage*(1*data[4])/100);
 
-						bmr = data[2] == "Male" ? 10*data[4] + 6.25*data[5]  - 5*data[6] + 5 : 10*data[4] + 6.25*data[5]  - 5*data[6] - 161; 
+						bmr = 370 + 21.6*lbm;  //data[2] == "Male" ? 10*data[4] + 6.25*data[5]  - 5*data[6] + 5 : 10*data[4] + 6.25*data[5]  - 5*data[6] - 161; 
 
 						tdee = bmr * activity_multiplier;
 
@@ -186,9 +223,9 @@
 							ppct: Math.round(data[12]) + "%",
 							cpct: Math.round(data[13]) + "%",
 							fpct: Math.round(data[14]) + "%",
-							pcnt: Math.round(fcnt) + " Cal",
+							pcnt: Math.round(pcnt) + " Cal",
 							ccnt: Math.round(ccnt) + " Cal",
-							fcnt: Math.round(pcnt) + " Cal"
+							fcnt: Math.round(fcnt) + " Cal"
 					
 						}
 					
@@ -197,7 +234,7 @@
 
 						lbm = data[4] - (body_fat_percentage*(1*data[4])/100);
 
-						bmr = data[2] == "Male" ? 4.53592*data[4] + 6.25*2.54*data[5]  - 5*data[6] + 5 : 4.53592*data[4] + 6.25*2.54*data[5]  - 5*data[6] - 161; 
+						bmr = 270 + 21.6*0.453592*lbm; //data[2] == "Male" ? 4.53592*data[4] + 6.25*2.54*data[5]  - 5*data[6] + 5 : 4.53592*data[4] + 6.25*2.54*data[5]  - 5*data[6] - 161; 
 
 						tdee = bmr * activity_multiplier;
 
@@ -221,9 +258,9 @@
 							ppct: Math.round(data[12]) + "%",
 							cpct: Math.round(data[13]) + "%",
 							fpct: Math.round(data[14]) + "%",
-							pcnt: Math.round(fcnt) + " Cal",
+							pcnt: Math.round(pcnt) + " Cal",
 							ccnt: Math.round(ccnt) + " Cal",
-							fcnt: Math.round(pcnt) + " Cal"
+							fcnt: Math.round(fcnt) + " Cal"
 					
 						}
 
