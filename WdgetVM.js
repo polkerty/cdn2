@@ -97,7 +97,9 @@
 						
 					a("#mc_ppct0").val(ips[11].value);	
 					a("#mc_cpct0").val(ips[12].value);	
-					a("#mc_fpct0").val(ips[13].value);	
+					a("#mc_fpct0").val(ips[13].value);
+					
+					update_display();	
 					
 				
 				}
