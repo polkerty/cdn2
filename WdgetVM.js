@@ -27,10 +27,10 @@
 				*/
 											
 				//setup				
-				a(u).append("<style>#widgetForm input.num { width:50px !important; text-align:center !important;} #widgetForm input[type=range] { width:140px !important; } #widgetForm .mc_report { font-size:16pt !important; float:right !important;position:relative !important; top:-15px !important;}</style>");
+				a(u).append("<style>#mc_ppct0, #mc_fpct0, #mc_cpct0 { border-width:3px !important; border-color:white !important; width:50px !important; text-align:center !important;} #widgetForm input[type=range] { width:140px !important; } #widgetForm .mc_report { font-size:16pt !important; float:right !important;position:relative !important; top:-15px !important;}</style>");
 				a("input[name=input7]", u).after("<span class='mc_report' id='mc_lbm' >0 lb</span>");
 				a("input[name=input7]", u).remove();
-				a("input[name=input8]", u).after("<span class='mc_report' id='mc_bmr' >0</span>");
+				a("input[name=input8]", u).after("<span class='mc_report' id='mc_bmr' >0 cal</span>");
 				a("input[name=input8]", u).remove();
 				a("input[name=input9]", u).after("<span class='mc_report' id='mc_tdee' >0 cal</span>");
 				a("input[name=input9]", u).remove();
@@ -60,8 +60,8 @@
 				a(u).on("input", "input[type=range]",update_display);
 				
 				
-				var fields = a(".field",u).toArray();
-				a([fields[4],fields[5]]).html(""); 
+				/*var fields = a(".field",u).toArray();
+				a([fields[4],fields[5]]).html(""); */
 				
 				
 				//$("input6", u).hide().after("<span id='mc_lbm' ></span>");
@@ -201,7 +201,7 @@
 
 						lbm = data[4] - (body_fat_percentage*(1*data[4])/100);
 
-						bmr = 370 + 21.6*lbm;  //data[2] == "Male" ? 10*data[4] + 6.25*data[5]  - 5*data[6] + 5 : 10*data[4] + 6.25*data[5]  - 5*data[6] - 161; 
+						bmr = /*370 + 21.6*lbm;*/ data[2] == "Male" ? 88.362 + 13.397*data[4] + 4.799*data[5]  - 5.677*data[6]  : 447.593 + 9.247*data[4] + 3.098*data[5]  - 4.330*data[6]; 
 
 						tdee = bmr * activity_multiplier;
 
@@ -236,7 +236,7 @@
 
 						lbm = data[4] - (body_fat_percentage*(1*data[4])/100);
 
-						bmr = 270 + 21.6*0.453592*lbm; //data[2] == "Male" ? 4.53592*data[4] + 6.25*2.54*data[5]  - 5*data[6] + 5 : 4.53592*data[4] + 6.25*2.54*data[5]  - 5*data[6] - 161; 
+						bmr = /*270 + 21.6*0.453592*lbm; */ data[2] == "Male" ? 88.362 + 0.453592*13.397*data[4] + 2.54*4.799*data[5]  - 5.677*data[6]  : 447.593 + 0.453592*9.247*data[4] + 2.54*3.098*data[5]  - 4.330*data[6]; 
 
 						tdee = bmr * activity_multiplier;
 
