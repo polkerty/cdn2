@@ -27,23 +27,24 @@
 				*/
 											
 				//setup				
-				a(u).append("<style>#mc_ppct0, #mc_fpct0, #mc_cpct0 { border-width:3px !important; border-color:white !important; width:50px !important; text-align:center !important;} #widgetForm input[type=range] { width:140px !important; } #widgetForm .mc_report { font-size:16pt !important; float:right !important;position:relative !important; top:-15px !important;}</style>");
+				a(u).append("<style>#widgetForm .msg { font-style:italic !important; color:white !important; font-size:smaller !important; } #mc_ppct0, #mc_fpct0, #mc_cpct0 { border-width:3px !important; border-color:white !important; width:50px !important; text-align:center !important;} #widgetForm input[type=range] { width:140px !important; } #widgetForm .mc_report { font-size:16pt !important; float:right !important;position:relative !important; top:-15px !important;}</style>");
 				a("input[name=input7]", u).after("<span class='mc_report' id='mc_lbm' >0 lb</span>");
 				a("input[name=input7]", u).remove();
 				a("input[name=input8]", u).after("<span class='mc_report' id='mc_bmr' >0 cal</span>");
 				a("input[name=input8]", u).remove();
 				a("input[name=input9]", u).after("<span class='mc_report' id='mc_tdee' >0 cal</span>");
 				a("input[name=input9]", u).remove();
+				a(".field:nth-of-type(12)", u).html(a(".field:nth-of-type(12)", u).html().split("Total Calories").join("TOTAL CALORIES"));
 				a("input[name=input11]", u).after("<span class='mc_report' id='mc_cals' >0 cal</span>");
 				a("input[name=input11]", u).remove();
 				a("input[name=input12]", u).after("<span class='mc_report' id='mc_pcals' >0 g</span>");
-				a("input[name=input12]", u).after("<input class='num' id='mc_ppct0' value='33'/>%<input type='range' id='mc_12' step='1' min='0' max='100' value='33' /><span id='mc_pcnt' >0 Cal</span>");
+				a("input[name=input12]", u).after("<input class='num' id='mc_ppct0' value='33'/>%<input type='range' id='mc_12' step='1' min='0' max='100' value='33' /><span id='mc_pcnt' >0 Cal</span><div class='msg' >Enter Percentage</div>");
 				a("input[name=input12]", u).remove();
 				a("input[name=input13]", u).after("<span class='mc_report' id='mc_ccals' >0 g</span>");
-				a("input[name=input13]", u).after("<input class='num' id='mc_cpct0' value='33'/>%<input type='range' id='mc_13' step='1' min='0' max='100' value='33' /><span id='mc_ccnt' >0 Cal</span>");
+				a("input[name=input13]", u).after("<input class='num' id='mc_cpct0' value='33'/>%<input type='range' id='mc_13' step='1' min='0' max='100' value='33' /><span id='mc_ccnt' >0 Cal</span><div class='msg' >Enter Percentage</div>");
 				a("input[name=input13]", u).remove();
 				a("input[name=input14]", u).after("<span class='mc_report' id='mc_fcals' >0 g</span>");
-				a("input[name=input14]", u).after("<input class='num' id='mc_fpct0' value='33'/>%<input type='range' id='mc_14' step='1' min='0' max='100' value='34' /><span id='mc_fcnt' >0 Cal</span>");
+				a("input[name=input14]", u).after("<input class='num' id='mc_fpct0' value='33'/>%<input type='range' id='mc_14' step='1' min='0' max='100' value='34' /><span id='mc_fcnt' >0 Cal</span><div class='msg' >Enter Percentage</div>");
 				a("input[name=input14]", u).remove();
 				a(".calc_button").remove();
 				
